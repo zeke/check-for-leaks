@@ -22,5 +22,8 @@
   "scripts": {
     "test": "mocha && standard --fix && standard-markdown"
   },
-  "bin": "cli.js"
+  "bin": "cli.js",
+  "engines": {
+    "node": ">=4"
+  }
 }
