@@ -9,7 +9,7 @@ const dangerousFilenames = [
 ]
 
 module.exports = function checkForLeaks (dir) {
-  let leaks = []
+  const leaks = []
 
   // if dir doesn't exist, assume is relative to CWD
   if (!fs.existsSync(dir)) {
