@@ -1,5 +1,7 @@
 const nixt = require('nixt')
-const {describe, it} = require('mocha')
+const mocha = require('mocha')
+const describe = mocha.describe
+const it = mocha.it
 
 describe('checkForLeaks CLI', () => {
   it('writes to stderr and exits ungracefully when leaks are found', (done) => {

@@ -1,5 +1,7 @@
 const path = require('path')
-const {describe, it} = require('mocha')
+const mocha = require('mocha')
+const describe = mocha.describe
+const it = mocha.it
 require('chai').should()
 
 const checkForLeaks = require('..')
