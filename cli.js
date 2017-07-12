@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const args = require('minimist')(process.argv.slice(2))
 const check = require('.')
 const dir = args._[0] || process.cwd()
