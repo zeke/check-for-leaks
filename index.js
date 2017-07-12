@@ -9,7 +9,7 @@ const dangerousFilenames = [
 ]
 
 module.exports = function checkForLeaks (dir) {
-  let leaks = []
+  const leaks = []
 
   // if dir doesn't exist, assume is relative to CWD
   if (!fs.existsSync(dir)) {
@@ -22,8 +22,7 @@ module.exports = function checkForLeaks (dir) {
       '**/.git/**',
       '**/node_modules/**'
     ]
-  })
-    .filter(filename => dangerousFilenames.includes(path.basename(filename)))
+  }).filter(filename => dangerousFilenames.indexOf(path.basename(filename)) > -1)
 
   // bail if no dangerous files are present
   if (!dangerfiles.length) return leaks
