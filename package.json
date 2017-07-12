@@ -1,6 +1,6 @@
 {
   "name": "check-for-leaks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a tool to help avoid publishing secrets to github and npm",
   "main": "index.js",
   "repository": "https://github.com/zeke/check-for-leaks",
