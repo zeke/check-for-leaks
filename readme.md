@@ -1,33 +1,36 @@
 # check-for-leaks 
 
-a tool to help avoid publishing secrets to github and npm
+> avoid publishing secrets to git and npm
 
 ## Why?
 
-It's too easy to publish secrets to GitHub and npm by accident.
-It's even easier to make this mistake when your project
-has both a `.gitignore` file and a `.npmignore` file.
+It's too easy to accidentally publish files like `.npmrc` or `.env` to a remote 
+git repo or the npm registry. It's even easier to make this mistake when your 
+project has both a `.gitignore` file and a `.npmignore` file.
 
-From the npm docs on [keeping files out of your package](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package):
+If a `.npmignore` file exists, [npm will disregard the `.gitignore` file](https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package). This 
+makes sense, but it is a subtle behavior that can have dangerous consequences: 
+Imagine that your project has a healthy `.gitignore` with all of the secrets 
+ignored, then you later add a `.npmignore` file to reduce the  size of the 
+published module. Any patterns that you don't copy over from the `.gitignore` 
+file will now be included when you publish the module.
 
-> Use a `.npmignore` file to keep stuff out of your package.  If there's
-no `.npmignore` file, but there *is* a `.gitignore` file, then npm will
-ignore the stuff matched by the `.gitignore` file.  If you *want* to
-include something that is excluded by your `.gitignore` file, you can
-create an empty `.npmignore` file to override it.
+## Usage (TLDR version)
 
-Note that 👉 **if a `.npmignore` file exists, npm disregards the `.gitignore` file** 👈. This is a subtle behavior that can have dangerous
-consequences: Imagine that your project has a healthy `.gitignore` with
-all of the secrets ignored, then you later add a `.npmignore` file to reduce the size of the published module. Any patterns that you don't
-copy over from the `.gitignore` file will now be included when you publish the module.
-
-## Installation
+To check your project for leaks before every `git push` or `npm publish`, run the following:
 
 ```sh
-npm install check-for-leaks --save
+cd my-vulnerable-project
+npm i -g npe
+npm i -D check-for-leaks husky
+npe scripts.prepack check-for-leaks
+npe scripts.prepush check-for-leaks
 ```
 
-## Usage
+[npe](http://ghub.io/npe) is a CLI for editing package.json files. 
+[husky](http://ghub.io/husky) creates git hooks.
+
+## Usage (cool-story-bro version)
 
 This package can be used from the command line or as a module.
 
